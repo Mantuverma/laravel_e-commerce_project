@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductDiscountController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Customer\CustomerMainController;
 use App\Http\Controllers\Seller\SellerProductController;
 use App\Http\Controllers\Seller\SellerStoreController;
 use App\Http\Controllers\Seller\SellterMainController;
@@ -85,9 +86,33 @@ Route::middleware(['auth', 'verified', 'role:vender'])->group(function () {
           
         });
 
+    });
+       
+});
 
 
-     
+Route::middleware(['auth', 'verified', 'role:customer'])->group(function () {
+    Route::prefix('user')->group(function () {
+        Route::controller(CustomerMainController::class)->group(function () {
+            Route::get('/dashboard', 'profile')->name('customer');
+            Route::get('/history', 'history')->name('customer.history');
+            Route::get('/payment', 'payment')->name('customer.payment');
+            Route::get('/affilated', 'affilated')->name('customer.affilated');
+           
+          
+        });
+
+        Route::controller(SellerStoreController::class)->group(function () {
+            Route::get('/store/create', 'index')->name('vendor.store.create');
+            Route::get('/store/manage', 'store_management')->name('vendor.store.manage');
+          
+        });
+
+        Route::controller(SellerProductController::class)->group(function () {
+            Route::get('/product/create', 'product_create')->name('vendor.product.create');
+            Route::get('/product/manage', 'product_management')->name('vendor.product.manage');
+          
+        });
 
     });
        
@@ -97,9 +122,9 @@ Route::middleware(['auth', 'verified', 'role:vender'])->group(function () {
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified','role:customer'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified','role:customer'])->name('dashboard');
 
 
 // Route::get('/admin/dashboard', function () {
