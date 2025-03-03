@@ -8,10 +8,13 @@ use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductDiscountController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Seller\SellerProductController;
+use App\Http\Controllers\Seller\SellerStoreController;
+use App\Http\Controllers\Seller\SellterMainController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
@@ -32,8 +35,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
         });
 
         Route::controller(SubCategoryController::class)->group(function () {
-            Route::get('/subcategory/create', 'index')->name('category.create');
-            Route::get('/subcategory/manage', 'manage')->name('category.manage');
+            Route::get('/subcategory/create', 'index')->name('subcategory.create');
+            Route::get('/subcategory/manage', 'manage')->name('subcategory.manage');
            
         });
         
@@ -46,7 +49,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
         Route::controller(ProductController::class)->group(function () {
             Route::get('/product/manage', 'index')->name('product.manage');
-            Route::get('/category/review/manage', 'review_manage')->name('category.review.manage');
+            Route::get('/product/review/manage', 'review_manage')->name('product.review.manage');
            
         });
         Route::controller(ProductDiscountController::class)->group(function () {
@@ -60,6 +63,38 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
        
 });
    
+
+
+Route::middleware(['auth', 'verified', 'role:vender'])->group(function () {
+    Route::prefix('seller')->group(function () {
+        Route::controller(SellterMainController::class)->group(function () {
+            Route::get('/dashboard', 'index')->name('vendor');
+            Route::get('/orderhistory', 'order_history')->name('vendor.order.history');
+          
+        });
+
+        Route::controller(SellerStoreController::class)->group(function () {
+            Route::get('/store/create', 'index')->name('vendor.store.create');
+            Route::get('/store/manage', 'store_management')->name('vendor.store.manage');
+          
+        });
+
+        Route::controller(SellerProductController::class)->group(function () {
+            Route::get('/product/create', 'product_create')->name('vendor.product.create');
+            Route::get('/product/manage', 'product_management')->name('vendor.product.manage');
+          
+        });
+
+
+
+     
+
+    });
+       
+});
+   
+
+
 
 
 Route::get('/dashboard', function () {

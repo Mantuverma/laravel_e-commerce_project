@@ -29,7 +29,7 @@ class RoleManager
                     return $next($request);
                 }
                 break;
-            case 'vendor':
+            case 'vender':
                 if($userRole==1){
                     return $next($request);
                 }
@@ -48,7 +48,7 @@ class RoleManager
                 return redirect()->route('admin');
                 break;
             case 1:
-                return redirect()->route('seller');
+                return redirect()->route('vendor');
                 break;
             case 2:
                 return redirect()->route('dashboard');
