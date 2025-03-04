@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductDiscountController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Customer\CustomerMainController;
+use App\Http\Controllers\MasterCategoryController;
 use App\Http\Controllers\Seller\SellerProductController;
 use App\Http\Controllers\Seller\SellerStoreController;
 use App\Http\Controllers\Seller\SellterMainController;
@@ -56,8 +57,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
         Route::controller(ProductDiscountController::class)->group(function () {
             Route::get('/discount/create', 'index')->name('discount.create');
             Route::get('/discount/manage', 'manage')->name('discount.manage');
-           
-           
+        });
+
+          Route::controller(MasterCategoryController::class)->group(function () {
+            Route::post('/store/create', 'store_category')->name('store.create');
+    
         });
 
     });
@@ -118,25 +122,6 @@ Route::middleware(['auth', 'verified', 'role:customer'])->group(function () {
        
 });
    
-
-
-
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified','role:customer'])->name('dashboard');
-
-
-// Route::get('/admin/dashboard', function () {
-//     return view('admin');
-// })->middleware(['auth', 'verified','role:admin'])->name('admin');
-
-// Route::get('seller/dashboard', function () {
-//     return view('seller');
-// })->middleware(['auth', 'verified','role:vendor'])->name('seller');
-
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
