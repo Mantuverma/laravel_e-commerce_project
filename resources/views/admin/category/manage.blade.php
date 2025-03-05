@@ -25,8 +25,9 @@
                 <tr>
                     <th scope="row">{{$category->id}}</th>
                     <td>{{$category->category_name}}</td>
-                    <td>
-                        <a href="#" class="btn btn-primary mr-2">Edit</a>
+                    <td> 
+                      
+                        <a href="{{route('store.edit',$category->id)}}" class="btn btn-primary mr-2">Edit</a>
                         <a href="#" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>

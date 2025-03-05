@@ -61,6 +61,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
           Route::controller(MasterCategoryController::class)->group(function () {
             Route::post('/store/create', 'store_category')->name('store.create');
+            Route::get('/store/edit/{id}', 'edit_category')->name('store.edit');
+            Route::put('/store/update/{id}', 'update_category')->name('store.update');
+            Route::put('/store/delete/{id}', 'delete_category')->name('store.delete');
     
         });
 

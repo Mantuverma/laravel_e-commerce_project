@@ -24,5 +24,33 @@ class MasterCategoryController extends Controller
         // Category::create($validate_data);
         return redirect()->back()->with('success', 'Category Added Successfully');
     }
+
+    public function edit_category($id)
+    {
+        $category = Category::find($id);
+        return view('admin.category.edit', compact('category'));
+    }
     
+    public function update_category(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+         $validate_data=$request->validate([
+            'category_name' => 'unique:categories|max:100|required',
+        ]);
+
+        $category->update($validate_data);
+
+      
+
+        return redirect()->back()->with('success', 'Category Updated Successfully');
+    }
+
+    public function delete_category($id)
+    {
+        $category = Category::find($id);
+        $category->delete();
+
+        return redirect()->back()->with('success', 'Category Deleted Successfully');
+    }
+
 }
