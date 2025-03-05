@@ -30,7 +30,8 @@
         @endif
 
        
-     <form action="{{route('store.update',$category->$id)}}" method="POST">
+     {{-- <form action="{{route('store.update',$category->$id)}}" method="POST"> --}}
+        <form action="{{ route('store.update', $category->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">

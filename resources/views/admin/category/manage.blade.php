@@ -10,6 +10,12 @@
     <div class="card-header">
         <h5 class="card-title mb-0"> All Category </h5>
     </div>
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        {{-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> --}}              
+    </div>
+    @endif
     <div class="card-body">
       <div class="table-responsive">
           <table class="table">
@@ -26,9 +32,15 @@
                     <th scope="row">{{$category->id}}</th>
                     <td>{{$category->category_name}}</td>
                     <td> 
-                      
-                        <a href="{{route('store.edit',$category->id)}}" class="btn btn-primary mr-2">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
+                       <div class="d-flex">
+                        <a href="{{route('store.edit',$category->id)}}" class="btn btn-primary mr-10">Edit</a>
+                        <form action="{{route('store.delete',$category->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
+                        </form>
+                        </div>
+                        {{-- <a href="{{route('store.delete',$category->id)}}" class="btn btn-danger">Delete</a> --}}
                     </td>
                 </tr>
                 @endforeach
