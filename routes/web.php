@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductDiscountController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Customer\CustomerMainController;
 use App\Http\Controllers\MasterCategoryController;
+use App\Http\Controllers\MasterSubCategoryController;
 use App\Http\Controllers\Seller\SellerProductController;
 use App\Http\Controllers\Seller\SellerStoreController;
 use App\Http\Controllers\Seller\SellterMainController;
@@ -64,6 +65,14 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
             Route::get('/store/edit/{id}', 'edit_category')->name('store.edit');
             Route::put('/store/update/{id}', 'update_category')->name('store.update');
             Route::delete('/store/delete/{id}', 'delete_category')->name('store.delete');
+    
+        });
+
+         Route::controller(MasterSubCategoryController::class)->group(function () {
+            Route::post('/store/subcategories', 'store_subcategory')->name('store.subcategories');
+            Route::get('/store/subcategories/{id}', 'edit_subcategory')->name('store.edit.subcategories');
+            Route::put('/store/update/subcategories/{id}', 'update_subcategory')->name('store.update.subcategories');
+            Route::delete('/store/delete/subcategories/{id}', 'delete_category')->name('store.delete.subcategories');
     
         });
 

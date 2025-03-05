@@ -1,14 +1,14 @@
 @extends('admin.layouts.layout')
 
 @section('admin_page_title')
-    Subcategory
+Update Subategory
 @endsection
 
 @section('admin_layout')
 
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title mb-0"> Create Sucategory </h5>
+        <h5 class="card-title mb-0"> Update Category </h5>
     </div>
     <div class="card-body">
         @if ($errors->any())
@@ -30,21 +30,14 @@
         @endif
 
        
-     <form action="{{route('store.subcategories')}}" method="POST">
+     {{-- <form action="{{route('store.update',$category->$id)}}" method="POST"> --}}
+        <form action="{{ route('store.update.subcategories', $subcategory->id) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="form-group">
-            <label for="name" class="fw-bold mb-2">Category Name</label>
-            <input type="text" name="subcategory_name" id="name" class="form-control" placeholder="Enter Category Name">
-            
-            <label for="name" class="fw-bold mb-2">Select Categories</label>
-
-            <select name="category_id" id="category_id" class="form-control">
-                @foreach ($categories as $category)
-                    <option value="{{$category->id}}">{{$category->category_name}}</option>
-                @endforeach
-            </select>
-
-            <button type="submit" class="btn  btn-primary w-100 mt-3">Add Sub Category</button>
+            <label for="subcategory_name" class="fw-bold mb-2">Subategory Name</label>
+            <input type="text" name="subcategory_name" id="name" class="form-control" value="{{$subcategory->subcategory_name}}" placeholder="Enter Category Name">
+            <button type="submit" class="btn  btn-primary w-100 mt-3">Update Sub Category</button>
 
         </div>
 
