@@ -29,7 +29,6 @@
         </div>
         @endif
 
-       
      {{-- <form action="{{route('store.update',$category->$id)}}" method="POST"> --}}
         <form action="{{ route('update.productattribute', $attribute->id) }}" method="POST">
         @csrf
