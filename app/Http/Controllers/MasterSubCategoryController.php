@@ -24,13 +24,13 @@ class MasterSubCategoryController extends Controller
 
     }
 
-    public function edit_subcategory($id)
-    {
+    public function edit_subcategory($id){
         $subcategory = SubCategory::find($id);
         return view('admin.sub_category.edit', compact('subcategory'));
     }
-public function update_subcategory(Request $request, $id)
-{
+    
+    public function update_subcategory(Request $request, $id)
+    {
     $subcategory = SubCategory::findOrFail($id);
     if (!$subcategory) {
             return redirect()->back()->with('error', 'Subcategory not found');

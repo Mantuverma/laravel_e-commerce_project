@@ -1,14 +1,14 @@
 @extends('admin.layouts.layout')
 
 @section('admin_page_title')
-    Create Attribute
+    Update Attribute
 @endsection
 
 @section('admin_layout')
 
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title mb-0"> Create Attribute </h5>
+        <h5 class="card-title mb-0">Update Attribute </h5>
     </div>
     <div class="card-body">
         @if ($errors->any())
@@ -30,12 +30,14 @@
         @endif
 
        
-     <form action="{{route('store.productattribute')}}" method="POST">
+     {{-- <form action="{{route('store.update',$category->$id)}}" method="POST"> --}}
+        <form action="{{ route('update.productattribute', $attribute->id) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="form-group">
-            <label for="attribute_name" class="fw-bold mb-2">Attribute Name</label>
-            <input type="text" name="attribute_name" id="name" class="form-control" placeholder="Enter Attribute Name">
-            <button type="submit" class="btn  btn-primary w-100 mt-3">Add Attribute</button>
+            <label for="attribute_name" class="fw-bold mb-2">Category Name</label>
+            <input type="text" name="attribute_name" id="name" class="form-control" value="{{$attribute->attribute_name}}" placeholder="Enter Category Name">
+            <button type="submit" class="btn  btn-primary w-100 mt-3">Update Category</button>
 
         </div>
 

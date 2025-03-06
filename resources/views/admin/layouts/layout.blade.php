@@ -123,7 +123,7 @@
 		 </li>
 	   
 		 <li class="sidebar-item {{request()->routeIs('productattribute.manage') ? 'active' : ''}}">
-			 <a class="sidebar-link" href="{{route('product.review.manage')}}">
+			 <a class="sidebar-link" href="{{route('productattribute.manage')}}">
 		   <i class="align-middle" data-feather="list"></i> <span class="align-middle">Manage</span>
 	   </a>
 		 </li>

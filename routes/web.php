@@ -46,7 +46,10 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
         Route::controller(ProductAttributeController::class)->group(function () {
             Route::get('/productattribute/create', 'index')->name('productattribute.create');
             Route::get('/productattribute/manage', 'manage')->name('productattribute.manage');
-    
+            Route::get('/store/productattribute/{id}', 'edit_attribute')->name('store.edit.productattribute');
+            Route::post('/store/productattribute/{id}', 'store_attribute')->name('store.productattribute');
+            Route::put('/update/productattribute/{id}', 'update_attribute')->name('update.productattribute');
+            Route::delete('/delete/productattribute/{id}', 'delete_attribute')->name('delete.productattribute');
            
         });
 
